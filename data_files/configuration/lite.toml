@@ -1,0 +1,71 @@
+[General]
+file_name = "Test_Lite.sqlite"
+
+[Time]
+model_years = [2030, 2040]
+resolution = "hourly"
+
+[Geography]
+regions = ["NS"]
+
+[Financials]
+currency = "USD"
+base_currency_year = 2021
+social_discount_rate = 0.03
+inflation_rate = 0.025
+
+[Units]
+activity = "MWh" # kWh, MWh, GWh, TWh, GJ, TJ, PJ
+capacity = "MW" # kW, MW, GW, TW
+emissions = "kt" # g, kg, t, kt, Mt
+currency = "none" # none, k, M, B
+
+[Generators]
+
+  [Generators.New]
+  file_name = "./data_files/generators/new/atb-2023-gens.toml"
+
+    [Generators.New.Regional]
+    global = []
+
+    NS = ["naturalgas-ct-fframe-moderate",
+          "naturalgas-cc-hframe-moderate",
+          "naturalgas-cc-ccs-95-hframe-moderate",
+          "nuclear-smr-moderate"]
+    NB = []  # Fill this as needed
+
+      [Generators.New.Overrides]
+      NS = { wacc = 0.05 }
+      NB = {}  # Fill this as needed
+
+  [Generators.Existing]
+
+    [Generators.Existing.Regional]
+    NS = ["all"]
+    NB = []  # Fill this as needed
+
+[Transmission]
+
+[Policies]
+global = []
+
+  [Policies.Regional]
+  NS = []
+  NB = []  # Fill this as needed
+
+[Fuels]
+global = []
+
+  [Fuels.Regional]
+  NS = ["natural_gas", "coal", "nuclear", "ethos", "biomass"]
+  NB = []  # Fill this as needed
+
+[Emissions]
+commodities_to_report = ['co2']
+
+[Emissions.warming_potentials]
+co2 = 1.0
+ch4 = 25.0
+
+[Options]
+endogenous_retirement = false

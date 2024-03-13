@@ -1,0 +1,338 @@
+[metadata]
+file_version = "1.0"
+last_updated = "2023-01-01"
+comment = "This configuration file contains the setup for various energy technologies under different scenarios."
+
+[defaults]
+data_source = "NREL ATB (2023)"
+capacity_unit = "kW"
+activity_unit = "MWh"
+sector = "generation"
+cost_year = 2021
+cost_unit = "none" # none, k, M, B.
+currency = "USD"
+start_year = 2021
+end_year = 2050
+
+[wind-onshore-advanced]
+name = "E_WIND"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "advanced"
+capital_costs = [1363, 1533, 1434, 1274, 1244, 1215, 1185, 1155, 1126, 1096, 1084, 1071, 1059, 1047, 1034, 1022, 1010, 997, 985, 973, 960, 948, 936, 923, 911, 899, 887, 874, 862, 850]
+fixed_costs = [30, 30, 29, 28, 27, 27, 26, 25, 24, 24, 23, 23, 22, 22, 22, 21, 21, 20, 20, 20, 19, 19, 18, 18, 18, 17, 17, 16, 16, 15]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.04
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+max_capacity_factor = 1.0
+capacity_credit = 0.2
+
+[wind-onshore-moderate]
+name = "E_WIND"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [1363, 1540, 1447, 1292, 1268, 1245, 1221, 1197, 1174, 1150, 1139, 1127, 1116, 1105, 1093, 1082, 1071, 1059, 1048, 1037, 1025, 1014, 1003, 991, 980, 969, 958, 946, 935, 924]
+fixed_costs = [30, 30, 30, 29, 29, 28, 28, 28, 27, 27, 27, 27, 26, 26, 26, 26, 26, 26, 25, 25, 25, 25, 25, 24, 24, 24, 24, 24, 23, 23]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.04
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+max_capacity_factor = 1.0
+capacity_credit = 0.2
+
+[wind-onshore-conservative]
+name = "E_WIND"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [1363, 1556, 1478, 1333, 1323, 1314, 1304, 1294, 1284, 1274, 1265, 1257, 1248, 1240, 1231, 1222, 1214, 1205, 1197, 1188, 1179, 1171, 1162, 1154, 1145, 1137, 1128, 1119, 1111, 1102]
+fixed_costs = [30, 30, 30, 30, 30, 29, 29, 29, 29, 29, 29, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.04
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+capacity_credit = 0.2
+
+[solar-utility-advanced]
+name = "E_PV-UTIL"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "advanced"
+capital_costs = [1291, 1373, 1316, 1259, 1202, 1145, 1088, 1031, 974, 917, 860, 803, 746, 689, 632, 625, 618, 610, 603, 595, 588, 580, 573, 566, 558, 551, 543, 536, 528, 521]
+fixed_costs = [23, 22, 21, 21, 20, 19, 19, 18, 17, 16, 16, 15, 14, 14, 13, 13, 13, 13, 13, 13, 13, 12, 12, 12, 12, 12, 12, 12, 12, 12]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.036
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+capacity_credit = 0
+
+[solar-utility-moderate]
+name = "E_PV-UTIL"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [1291, 1373, 1331, 1290, 1248, 1206, 1164, 1122, 1080, 1038, 997, 955, 913, 871, 829, 816, 803, 790, 777, 764, 751, 737, 724, 711, 698, 685, 672, 659, 646, 632]
+fixed_costs = [23, 22, 21, 21, 20, 20, 19, 19, 18, 18, 17, 17, 16, 16, 16, 15, 15, 15, 15, 15, 15, 15, 14, 14, 14, 14, 14, 14, 14, 13]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.036
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+capacity_credit = 0
+
+[solar-utility-conservative]
+name = "E_PV-UTIL"
+fuel = "ethos"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [1291, 1373, 1352, 1331, 1310, 1290, 1269, 1248, 1227, 1206, 1185, 1164, 1143, 1122, 1101, 1083, 1065, 1047, 1029, 1011, 993, 974, 956, 938, 920, 902, 884, 866, 847, 829]
+fixed_costs = [23, 22, 22, 21, 21, 21, 21, 20, 20, 20, 20, 19, 19, 19, 19, 18, 18, 18, 18, 18, 18, 17, 17, 17, 17, 17, 16, 16, 16, 16]
+variable_costs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+wacc = 0.036
+capital_recovery_period = 30
+lifetime = 30
+heatrate = 3.412
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 0
+outage_forced = 0
+outage_planned = 0
+capacity_credit = 0
+
+[nuclear-smr-moderate]
+name = "E_NUC-SMR"
+fuel = "uranium"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [10135, 9797, 9459, 9121, 8853, 8689, 8602, 8546, 8494, 8443, 8378, 8318, 8268, 8215, 8164, 8105, 8047, 7994, 7931, 7877, 7829, 7772, 7721, 7667, 7608, 7551, 7497, 7442, 7381, 7289]
+fixed_costs =[118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80]
+variable_costs = [3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13]
+wacc = 0.048
+capital_recovery_period = 60
+lifetime = 60
+heatrate = 10.447
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+min_load = 1.0
+outage_forced = 0.03
+outage_planned = 0.06
+capacity_credit = 0.9
+
+[nuclear-smr-conservative]
+name = "E_NUC-SMR"
+fuel = "uranium"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [10135, 9797, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459, 9459]
+fixed_costs = [118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80, 118.80]
+variable_costs = [3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13, 3.13]
+wacc = 0.048
+capital_recovery_period = 60
+lifetime = 60
+heatrate = 10.447
+emissions = { SO2 = 0.0, NOx = 0.0, Hg = 0.0, CO2 = 0.0 } # lbs/MMBtu
+capacity_credit = 0.9
+
+[naturalgas-ct-fframe-advanced]
+name = "E_NGCT-F"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "advanced"
+capital_costs = [1120, 1120, 1111, 1103, 1094, 1085, 1076, 1067, 1058, 1050, 1041, 1032, 1023, 1014, 1005, 996, 988, 979, 970, 961, 952, 943, 934, 926, 917, 908, 899, 890, 881, 872]
+fixed_costs = [24.00, 24.00, 23.80, 23.70, 23.60, 23.40, 23.30, 23.20, 23.00, 22.90, 22.80, 22.60, 22.50, 22.40, 22.30, 22.10, 22.00, 21.90, 21.70, 21.60, 21.50, 21.30, 21.20, 21.10, 20.90, 20.80, 20.70, 20.50, 20.40, 20.30]
+variable_costs = [6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = 9.717
+emissions = { SO2 = 0.001, NOx = 0.005, Hg = 0, CO2 = 119 } # lbs/MMBtu
+min_load = 0.16
+outage_forced = 0.05
+outage_planned = 0.07
+capacity_credit = 0.9
+
+[naturalgas-ct-fframe-moderate]
+name = "E_NGCT-F"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [1120, 1120, 1111, 1103, 1094, 1085, 1076, 1067, 1058, 1050, 1041, 1032, 1023, 1014, 1005, 996, 988, 979, 970, 961, 952, 943, 934, 926, 917, 908, 899, 890, 881, 872]
+fixed_costs = [24.00, 24.00, 23.80, 23.70, 23.60, 23.40, 23.30, 23.20, 23.00, 22.90, 22.80, 22.60, 22.50, 22.40, 22.30, 22.10, 22.00, 21.90, 21.70, 21.60, 21.50, 21.30, 21.20, 21.10, 20.90, 20.80, 20.70, 20.50, 20.40, 20.30]
+variable_costs = [6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = 9.717
+emissions = { SO2 = 0.001, NOx = 0.005, Hg = 0, CO2 = 119 } # lbs/MMBtu
+min_load = 0.16
+outage_forced = 0.05
+outage_planned = 0.07
+capacity_credit = 0.9
+
+[naturalgas-ct-fframe-conservative]
+name = "E_NGCT-F"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [1120, 1120, 1111, 1103, 1094, 1085, 1076, 1067, 1058, 1050, 1041, 1032, 1023, 1014, 1005, 996, 988, 979, 970, 961, 952, 943, 934, 926, 917, 908, 899, 890, 881, 872]
+fixed_costs = [24.00, 24.00, 23.80, 23.70, 23.60, 23.40, 23.30, 23.20, 23.00, 22.90, 22.80, 22.60, 22.50, 22.40, 22.30, 22.10, 22.00, 21.90, 21.70, 21.60, 21.50, 21.30, 21.20, 21.10, 20.90, 20.80, 20.70, 20.50, 20.40, 20.30]
+variable_costs = [6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44, 6.44]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = 9.717
+emissions = { SO2 = 0.001, NOx = 0.005, Hg = 0, CO2 = 119 } # lbs/MMBtu
+min_load = 0.16
+outage_forced = 0.05
+outage_planned = 0.07
+capacity_credit = 0.9
+
+[naturalgas-cc-hframe-advanced]
+name = "E_NGCC-H"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "advanced"
+capital_costs = [1283, 1283, 1267, 1251, 1235, 1219, 1203, 1187, 1171, 1155, 1139, 1123, 1107, 1091, 1075, 1065, 1055, 1045, 1035, 1025, 1016, 1006, 996, 986, 976, 966, 956, 946, 936, 926]
+fixed_costs = [30.80, 30.80, 30.40, 30.00, 29.60, 29.20, 28.80, 28.40, 28.00, 27.50, 27.10, 26.70, 26.30, 25.90, 25.50, 25.30, 25.10, 24.80, 24.60, 24.40, 24.20, 24.00, 23.70, 23.50, 23.30, 23.10, 22.90, 22.70, 22.40, 22.20]
+variable_costs = [1.96, 1.96, 1.94, 1.92, 1.90, 1.88, 1.86, 1.84, 1.82, 1.80, 1.78, 1.77, 1.75, 1.73, 1.71, 1.70, 1.69, 1.67, 1.66, 1.65, 1.64, 1.63, 1.62, 1.61, 1.60, 1.58, 1.57, 1.56, 1.55, 1.54]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [6.196, 6.196, 6.177, 6.159, 6.140, 6.122, 6.103, 6.085, 6.066, 6.048, 6.029, 6.011, 5.992, 5.973, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955, 5.955]
+emissions = { SO2 = 0.001, NOx = 0.004, Hg = 0, CO2 = 118.6 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9
+
+[naturalgas-cc-hframe-moderate]
+name = "E_NGCC-H"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [1283, 1283, 1271, 1259, 1246, 1234, 1222, 1210, 1197, 1185, 1173, 1160, 1148, 1136, 1124, 1114, 1105, 1096, 1087, 1078, 1068, 1059, 1050, 1041, 1031, 1022, 1013, 1004, 994, 985]
+fixed_costs = [30.80, 30.80, 30.50, 30.20, 29.90, 29.60, 29.30, 29.00, 28.70, 28.40, 28.10, 27.80, 27.50, 27.20, 26.90, 26.70, 26.50, 26.30, 26.10, 25.90, 25.70, 25.50, 25.30, 25.10, 24.90, 24.70, 24.50, 24.30, 24.10, 23.90]
+variable_costs = [1.96, 1.96, 1.94, 1.93, 1.91, 1.90, 1.88, 1.87, 1.86, 1.84, 1.83, 1.81, 1.80, 1.78, 1.77, 1.76, 1.75, 1.74, 1.73, 1.72, 1.71, 1.70, 1.69, 1.67, 1.66, 1.65, 1.64, 1.63, 1.62, 1.61]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [6.196, 6.196, 6.187, 6.177, 6.168, 6.159, 6.150, 6.140, 6.131, 6.122, 6.112, 6.103, 6.094, 6.085, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075, 6.075]
+emissions = { SO2 = 0.001, NOx = 0.004, Hg = 0, CO2 = 118.6 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9
+
+[naturalgas-cc-hframe-conservative]
+name = "E_NGCC-H"
+fuel = "natural-gas"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [1283, 1283, 1275, 1266, 1257, 1249, 1240, 1232, 1223, 1215, 1206, 1198, 1189, 1181, 1172, 1164, 1155, 1147, 1138, 1130, 1121, 1112, 1104, 1095, 1087, 1078, 1070, 1061, 1053, 1044]
+fixed_costs = [30.80, 30.80, 30.60, 30.50, 30.30, 30.10, 29.90, 29.70, 29.50, 29.30, 29.20, 29.00, 28.80, 28.60, 28.40, 28.20, 28.00, 27.80, 27.70, 27.50, 27.30, 27.10, 26.90, 26.70, 26.50, 26.40, 26.20, 26.00, 25.80, 25.60]
+variable_costs = [1.96, 1.96, 1.95, 1.94, 1.93, 1.92, 1.91, 1.90, 1.89, 1.88, 1.87, 1.86, 1.85, 1.84, 1.83, 1.82, 1.81, 1.80, 1.79, 1.78, 1.77, 1.76, 1.75, 1.74, 1.73, 1.72, 1.71, 1.70, 1.69, 1.69]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196, 6.196]
+emissions = { SO2 = 0.001, NOx = 0.004, Hg = 0, CO2 = 118.6 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9
+
+
+[naturalgas-cc-ccs-95-hframe-advanced]
+name = "E_NGCC-CCS-H"
+fuel = "natural-gas-ccs"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "advanced"
+capital_costs = [2531, 2531, 2465, 2399, 2333, 2267, 2201, 2135, 2069, 2003, 1937, 1871, 1805, 1739, 1673, 1652, 1632, 1612, 1592, 1572, 1551, 1531, 1511, 1491, 1471, 1450, 1430, 1410, 1390, 1370]
+fixed_costs = [59.30, 59.30, 57.80, 56.30, 54.70, 53.20, 51.60, 50.10, 48.60, 47.00, 45.50, 44.00, 42.40, 40.90, 39.40, 38.90, 38.50, 38.00, 37.60, 37.20, 36.70, 36.30, 35.80, 35.40, 34.90, 34.50, 34.10, 33.60, 33.20, 32.70]
+variable_costs = [4.40, 4.40, 4.31, 4.21, 4.12, 4.02, 3.93, 3.83, 3.74, 3.64, 3.55, 3.45, 3.36, 3.26, 3.17, 3.15, 3.12, 3.10, 3.08, 3.05, 3.03, 3.01, 2.99, 2.96, 2.94, 2.92, 2.89, 2.87, 2.85, 2.82]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [7.007, 7.007, 6.966, 6.925, 6.884, 6.843, 6.802, 6.761, 6.720, 6.679, 6.638, 6.597, 6.556, 6.515, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474, 6.474]
+emissions = { SO2 = 0, NOx = 0.003, Hg = 0, CO2 = 5.9 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9
+
+[naturalgas-cc-ccs-95-hframe-moderate]
+name = "E_NGCC-CCS-H"
+fuel = "natural-gas-ccs"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "moderate"
+capital_costs = [2531, 2531, 2486, 2441, 2396, 2351, 2306, 2260, 2215, 2170, 2125, 2080, 2035, 1989, 1944, 1922, 1900, 1878, 1855, 1833, 1811, 1789, 1766, 1744, 1722, 1700, 1677, 1655, 1633, 1611]
+fixed_costs = [59.30, 59.30, 58.30, 57.30, 56.20, 55.20, 54.20, 53.10, 52.10, 51.10, 50.00, 49.00, 48.00, 46.90, 45.90, 45.40, 44.90, 44.40, 44.00, 43.50, 43.00, 42.50, 42.00, 41.50, 41.00, 40.60, 40.10, 39.60, 39.10, 38.60]
+variable_costs = [4.40, 4.40, 4.34, 4.28, 4.22, 4.16, 4.10, 4.03, 3.97, 3.91, 3.85, 3.79, 3.73, 3.67, 3.61, 3.58, 3.56, 3.53, 3.51, 3.48, 3.46, 3.43, 3.40, 3.38, 3.35, 3.33, 3.30, 3.28, 3.25, 3.23]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [7.007, 7.007, 6.986, 6.966, 6.945, 6.925, 6.904, 6.884, 6.863, 6.843, 6.822, 6.802, 6.781, 6.761, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740, 6.740]
+emissions = { SO2 = 0, NOx = 0.003, Hg = 0, CO2 = 5.9 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9
+
+[naturalgas-cc-ccs-95-hframe-conservative]
+name = "E_NGCC-CCS-H"
+fuel = "natural-gas-ccs"
+capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
+class = -1 # -1 for not applicable.
+scenario = "conservative"
+capital_costs = [2531, 2531, 2507, 2483, 2459, 2434, 2410, 2386, 2362, 2337, 2313, 2289, 2264, 2240, 2216, 2192, 2167, 2143, 2119, 2095, 2070, 2046, 2022, 1998, 1973, 1949, 1925, 1900, 1876, 1852]
+fixed_costs = [59.30, 59.30, 58.80, 58.30, 57.70, 57.20, 56.70, 56.10, 55.60, 55.10, 54.60, 54.00, 53.50, 53.00, 52.40, 51.90, 51.40, 50.80, 50.30, 49.80, 49.20, 48.70, 48.20, 47.70, 47.10, 46.60, 46.10, 45.50, 45.00, 44.50]
+variable_costs = [4.40, 4.40, 4.37, 4.35, 4.32, 4.29, 4.26, 4.24, 4.21, 4.18, 4.15, 4.13, 4.10, 4.07, 4.04, 4.02, 3.99, 3.96, 3.93, 3.91, 3.88, 3.85, 3.82, 3.80, 3.77, 3.74, 3.71, 3.69, 3.66, 3.63]
+wacc = 0.056
+capital_recovery_period = 30
+lifetime = 55
+heatrate = [7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007, 7.007]
+emissions = { SO2 = 0, NOx = 0.003, Hg = 0, CO2 = 5.9 } # lbs/MMBtu
+min_load = 0.5
+outage_forced = 0.05
+outage_planned = 0.1
+capacity_credit = 0.9

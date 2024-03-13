@@ -1,0 +1,73 @@
+# Common database for power plant properties
+[defaults]
+data_source = "Princeton Net Zero America Project (2021). Annex A.3 EER model inputs catalog. [Online]. Available: https://netzeroamerica.princeton.edu/the-report"
+emis_CO2_data_source = "NREL ATB (2023)"
+min_load_data_source = "NREL ATB (2023)"
+outage_forced_data_source = "NREL ATB (2023)"
+outage_planned_data_source = "NREL ATB (2023)"
+cost_unit = "USD"
+cost_year = 2016
+capacity_unit = "kW"
+activity_unit = "MWh"
+emis_CO2_value = 202.3  # $/MWh
+
+# Coal-Lingan Power Plant
+[coal-lingan]
+name = "E_COAL-LINGAN"
+region = "NS"
+fuel = "coal-bituminous"
+n_units = 3 # Lingan 2 is retired, leaving 1, 3, 4.
+unit_capacity = 153000  # Typical unit size, in kW. Use "-1" if not applicable.
+vintage = 1980
+lifetime = 50
+heatrate = 10.62
+fixed_costs = { value = 32, note = "existing_pulverized coal power plant" }
+variable_costs = { value = 0.7000, note = "existing_pulverized coal power plant"  } # $/MWh
+[coal-lingan.planned_retirements]
+2030 = 3
+
+# Coal-Trenton Power Plant
+[coal-trenton]
+name = "E_COAL-TRENTON"
+region = "NS"
+fuel = "coal-bituminous"
+n_units = 2
+unit_capacity = 153000  # Typical unit size, in kW. Use "-1" if not applicable.
+vintage = 1978
+lifetime = 50
+heatrate = 10.26
+fixed_costs = { value = 32, note = "existing_pulverized coal power plant" }
+variable_costs = { value = 0.7000, note = "existing_pulverized coal power plant" } # $/MWh
+[coal-trenton.planned_retirements]
+2028 = 1
+2029 = 1
+
+# Coal-Tupper Power Plant
+[coal-tupper]
+name = "E_COAL-TUPPER"
+region = "NS"
+fuel = "coal-bituminous"
+n_units = 1
+unit_capacity = 153000  # Typical unit size, in kW. Use "-1" if not applicable.
+vintage = 1978
+lifetime = 50
+heatrate = 10.26
+fixed_costs = { value = 32, note = "existing_pulverized coal power plant" }
+variable_costs = { value = 0.7000, note = "existing_pulverized coal power plant" } # $/MWh
+[coal-tupper.planned_retirements]
+2029 = 1
+
+# Coal-Aconi Power Plant
+[coal-aconi]
+name = "E_COAL-ACONI"
+region = "NS"
+fuel = "coal-bituminous"
+n_units = 1
+unit_capacity = 168000  # Typical unit size, in kW. Use "-1" if not applicable.
+vintage = 1978
+lifetime = 50
+heatrate = 10.26
+fixed_costs = { value = 44, note = "existing_petroleum coke steam turbine power plant" }
+variable_costs = { value = 4.6000, note = "existing_pulverized coal power plant" } # $/MWh
+[coal-aconi.planned_retirements]
+2028 = 1
