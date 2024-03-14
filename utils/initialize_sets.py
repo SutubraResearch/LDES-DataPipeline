@@ -1,4 +1,5 @@
-from utils.db_utils import SQLiteDBManager
+from utils.time_utils import create_hourly_to_season_day_map
+import time
 
 
 def initialize_scenario_independent_sets(db_manager):
@@ -7,7 +8,7 @@ def initialize_scenario_independent_sets(db_manager):
     populate_technology_labels(db_manager)
     populate_time_of_day(db_manager)
     populate_time_season(db_manager)
-
+    populate_segfrac(db_manager)
 
 def populate_table_with_query(db_manager, query, data):
     for item in data:
@@ -53,3 +54,12 @@ def populate_time_season(conn):
                         not (month == 2 and day > 28) and not (month in [4, 6, 9, 11] and day > 30)]
     query = 'INSERT INTO time_season (t_season) VALUES (?)'
     populate_table_with_query(conn, query, time_season_data)
+
+
+def populate_segfrac(conn):
+    query = 'INSERT INTO SegFrac (season_name, time_of_day_name, segfrac) VALUES (?, ?, ?)'
+    hourly_map = create_hourly_to_season_day_map()
+    segfrac_data = [(season_name, time_of_day_name, 1 / 8760) for _,
+    (season_name, time_of_day_name) in hourly_map.items()]
+
+    conn.populate_table_with_query_bulk(query, segfrac_data)

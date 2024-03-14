@@ -2,12 +2,7 @@
 # Python 3.11.7
 import toml
 from utils.data_utils import get_conversion_factor, convert_units, capacity_to_activity_conversion
-
-# Paths for activity and capacity conversion CSV files
-ACTIVITY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_activity.csv"
-CAPACITY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_capacity.csv"
-EMISSIONS_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_emissions.csv"
-CURRENCY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_currency.csv"
+import constants
 
 # SQL query constant top-level declaration
 INSERT_TECHNOLOGIES_QUERY = """
@@ -68,13 +63,13 @@ def get_applicable_generators(config, region):
 
 def get_converted_value(value, from_unit, to_unit, conversion_type):
     if conversion_type == "activity":
-        filepath = ACTIVITY_CONVERSION_FILEPATH
+        filepath = constants.ACTIVITY_CONVERSION_FILEPATH
     elif conversion_type == "capacity":
-        filepath = CAPACITY_CONVERSION_FILEPATH
+        filepath = constants.CAPACITY_CONVERSION_FILEPATH
     elif conversion_type == "emissions":
-        filepath = EMISSIONS_CONVERSION_FILEPATH
+        filepath = constants.EMISSIONS_CONVERSION_FILEPATH
     elif conversion_type == "currency":
-        filepath = CURRENCY_CONVERSION_FILEPATH
+        filepath = constants.CURRENCY_CONVERSION_FILEPATH
 
     else:
         return value

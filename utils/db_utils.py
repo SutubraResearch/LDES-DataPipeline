@@ -43,6 +43,9 @@ class SQLiteDBManager:
         except Error as e:
             print(e)
 
+    def populate_table_with_query_bulk(self, query, data):
+        with self.conn:
+            self.conn.executemany(query, data)
 
 def copy_and_rename_sqlite_template(template_path: str, dest_dir: str, file_name: str) -> str:
     """Copy the SQLite template file and rename it according to the configuration"""
