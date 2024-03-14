@@ -172,6 +172,7 @@ def populate_cost_invest_table(db_manager, gen_data, config):
 
 
 def populate_cost_variable_table(db_manager, gen_data, config):
+    data_list = []
     defaults = gen_data.get('defaults', {})
 
     for region in config['Geography']['regions']:
@@ -216,10 +217,12 @@ def populate_cost_variable_table(db_manager, gen_data, config):
                         cost_variable_unit,
                         cost_variable_notes
                     )
-                    db_manager.execute_query(INSERT_COST_VARIABLE_QUERY, data_tuple)
+                    data_list.append(data_tuple)
+    db_manager.populate_table_with_query_bulk(INSERT_COST_VARIABLE_QUERY, data_list)
 
 
 def populate_cost_fixed_table(db_manager, gen_data, config):
+    data_list = []
     defaults = gen_data.get('defaults', {})
     for region in config['Geography']['regions']:
         for generator_name in get_applicable_generators(config, region):
@@ -264,7 +267,8 @@ def populate_cost_fixed_table(db_manager, gen_data, config):
                         cost_fixed_unit,
                         cost_fixed_notes
                     )
-                    db_manager.execute_query(INSERT_COST_FIXED_QUERY, data_tuple)
+                    data_list.append(data_tuple)
+    db_manager.populate_table_with_query_bulk(INSERT_COST_FIXED_QUERY, data_list)
 
 
 def populate_capacity_credit_table(db_manager, gen_data, config):
