@@ -13,6 +13,7 @@ cost_unit = "none" # none, k, M, B.
 currency = "USD"
 start_year = 2021
 end_year = 2050
+curtail = 0
 
 [wind-onshore-advanced]
 name = "E_WIND"
@@ -33,6 +34,7 @@ outage_forced = 0
 outage_planned = 0
 max_capacity_factor = 1.0
 capacity_credit = 0.2
+curtail = 1
 
 [wind-onshore-moderate]
 name = "E_WIND"
@@ -53,6 +55,7 @@ outage_forced = 0
 outage_planned = 0
 max_capacity_factor = 1.0
 capacity_credit = 0.2
+curtail = 1
 
 [wind-onshore-conservative]
 name = "E_WIND"
@@ -72,6 +75,7 @@ min_load = 0
 outage_forced = 0
 outage_planned = 0
 capacity_credit = 0.2
+curtail = 1
 
 [solar-utility-advanced]
 name = "E_PV-UTIL"
@@ -91,6 +95,7 @@ min_load = 0
 outage_forced = 0
 outage_planned = 0
 capacity_credit = 0
+curtail = 1
 
 [solar-utility-moderate]
 name = "E_PV-UTIL"
@@ -110,6 +115,7 @@ min_load = 0
 outage_forced = 0
 outage_planned = 0
 capacity_credit = 0
+curtail = 1
 
 [solar-utility-conservative]
 name = "E_PV-UTIL"
@@ -129,6 +135,7 @@ min_load = 0
 outage_forced = 0
 outage_planned = 0
 capacity_credit = 0
+curtail = 1
 
 [nuclear-smr-moderate]
 name = "E_NUC-SMR"
@@ -282,7 +289,7 @@ capacity_credit = 0.9
 
 [naturalgas-cc-ccs-95-hframe-advanced]
 name = "E_NGCC-CCS-H"
-fuel = "natural-gas-ccs"
+fuel = "natural-gas-ccs-95"
 capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
 class = -1 # -1 for not applicable.
 scenario = "advanced"
@@ -301,7 +308,7 @@ capacity_credit = 0.9
 
 [naturalgas-cc-ccs-95-hframe-moderate]
 name = "E_NGCC-CCS-H"
-fuel = "natural-gas-ccs"
+fuel = "natural-gas-ccs-95"
 capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
 class = -1 # -1 for not applicable.
 scenario = "moderate"
@@ -320,7 +327,7 @@ capacity_credit = 0.9
 
 [naturalgas-cc-ccs-95-hframe-conservative]
 name = "E_NGCC-CCS-H"
-fuel = "natural-gas-ccs"
+fuel = "natural-gas-ccs-95"
 capacity = -1  # Typical unit size, in MW. Use "-1" if not applicable.
 class = -1 # -1 for not applicable.
 scenario = "conservative"

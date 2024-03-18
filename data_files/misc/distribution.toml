@@ -1,0 +1,14 @@
+
+[transmission-and-distribution]
+name = "E_TRANSDIST"
+region = ""
+input_comm = "electricity"
+output_comm = "demand_elec"
+activity_unit = "MWh"
+sector = "distribution"
+fixed_costs = 0
+variable_costs = 0
+lifetime = 100
+efficiency = 1.0
+
+

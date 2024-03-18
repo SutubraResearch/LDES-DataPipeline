@@ -1,0 +1,41 @@
+[NS_natural-gas-ccs-95]
+name = "IMP_natural-gas-ccs-95"
+region = "NS"
+input_comm = "ethos"
+output_comm = "natural-gas-ccs-95"
+activity_unit = "MMBtu"
+sector = "imports"
+lifetime = 100
+efficiency = 1.0
+variable_costs = [ 2.914836, 3.590063,]
+emissions = 2.6455
+vintage = 2030
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+
+[NS_natural-gas]
+name = "IMP_natural-gas"
+region = "NS"
+input_comm = "ethos"
+output_comm = "natural-gas"
+activity_unit = "MMBtu"
+sector = "imports"
+lifetime = 100
+efficiency = 1.0
+variable_costs = [ 2.914836, 3.590063,]
+emissions = 52.91
+vintage = 2030
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+
+[NS_uranium]
+name = "IMP_uranium"
+region = "NS"
+input_comm = "ethos"
+output_comm = "uranium"
+activity_unit = "MMBtu"
+sector = "imports"
+lifetime = 100
+efficiency = 1.0
+variable_costs = [ 0.710349, 0.709693,]
+emissions = 0
+vintage = 2030
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"

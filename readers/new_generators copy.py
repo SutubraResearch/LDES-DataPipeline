@@ -2,10 +2,12 @@
 # Python 3.11.7
 import toml
 from utils.data_utils import get_conversion_factor, convert_units, capacity_to_activity_conversion
-from utils.time_utils import create_hourly_to_season_day_map
-import constants
-import os
-import pandas as pd
+
+# Paths for activity and capacity conversion CSV files
+ACTIVITY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_activity.csv"
+CAPACITY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_capacity.csv"
+EMISSIONS_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_emissions.csv"
+CURRENCY_CONVERSION_FILEPATH = "data_files/utils/unit_conversions_currency.csv"
 
 # SQL query constant top-level declaration
 INSERT_TECHNOLOGIES_QUERY = """
@@ -14,10 +16,6 @@ INSERT_TECHNOLOGIES_QUERY = """
 """
 INSERT_TECH_RESERVE_QUERY = """
     INSERT INTO tech_reserve (tech, notes)
-    VALUES (?, ?)
-"""
-INSERT_TECH_CURTAILMENT_QUERY = """
-    INSERT INTO tech_curtailment (tech, notes)
     VALUES (?, ?)
 """
 INSERT_EFFICIENCY_QUERY = """
@@ -56,14 +54,6 @@ INSERT_LIFETIME_TECH_QUERY = """
     INSERT INTO LifetimeTech (regions, tech, life, life_notes)
     VALUES (?, ?, ?, ?)
 """
-INSERT_LIFETIME_LOAN_QUERY = """
-    INSERT INTO LifetimeLoanTech (regions, tech, loan, loan_notes)
-    VALUES (?, ?, ?, ?)
-"""
-INSERT_CAPACITY_FACTOR_QUERY = """
-    INSERT INTO CapacityFactorTech (regions, season_name, time_of_day_name, tech, cf_tech, cf_tech_notes) 
-    VALUES (?, ?, ?, ?, ?, ?)
-"""
 def read_new_generator_data(file_path):
     with open(file_path, 'r') as file:
         data = toml.load(file)
@@ -78,13 +68,13 @@ def get_applicable_generators(config, region):
 
 def get_converted_value(value, from_unit, to_unit, conversion_type):
     if conversion_type == "activity":
-        filepath = constants.ACTIVITY_CONVERSION_FILEPATH
+        filepath = ACTIVITY_CONVERSION_FILEPATH
     elif conversion_type == "capacity":
-        filepath = constants.CAPACITY_CONVERSION_FILEPATH
+        filepath = CAPACITY_CONVERSION_FILEPATH
     elif conversion_type == "emissions":
-        filepath = constants.EMISSIONS_CONVERSION_FILEPATH
+        filepath = EMISSIONS_CONVERSION_FILEPATH
     elif conversion_type == "currency":
-        filepath = constants.CURRENCY_CONVERSION_FILEPATH
+        filepath = CURRENCY_CONVERSION_FILEPATH
 
     else:
         return value
@@ -116,13 +106,6 @@ def populate_technologies(db_manager, gen_data, config, sector="generation", fla
                 db_manager.execute_query(INSERT_TECH_RESERVE_QUERY, data_tuple_tech_reserve)
                 unique_technologies.add(resource_data.get('name'))
 
-                if resource_data.get('curtail'):
-                    data_tuple_tech_curtail = (
-                        resource_data.get('name'),
-                        None
-                    )
-                    db_manager.execute_query(INSERT_TECH_CURTAILMENT_QUERY, data_tuple_tech_curtail)
-
 
 def populate_efficiency_table(db_manager, gen_data, config):
     defaults = gen_data.get('defaults', {})
@@ -133,17 +116,13 @@ def populate_efficiency_table(db_manager, gen_data, config):
 
             input_comm = generator.get('fuel', defaults.get('fuel'))
             tech = generator.get('name', defaults.get('name'))
-            eff_notes = generator.get('data_source', defaults.get('data_source'))
+            eff_notes = defaults.get('data_source')
             start_year = generator.get('start_year', defaults.get('start_year'))
 
             for year in config['Time']['model_years']:
                 efficiency = generator.get('heatrate', defaults.get('heatrate'))
                 if isinstance(efficiency, list):
                     efficiency = efficiency[year - start_year]
-                if input_comm == "ethos":
-                    efficiency = 1.0
-                # Efficiencies are given as heat rates, so we need to convert them to efficiency
-                efficiency = 1/efficiency
                 data_tuple = (
                     region,
                     input_comm,
@@ -198,7 +177,6 @@ def populate_cost_invest_table(db_manager, gen_data, config):
 
 
 def populate_cost_variable_table(db_manager, gen_data, config):
-    data_list = []
     defaults = gen_data.get('defaults', {})
 
     for region in config['Geography']['regions']:
@@ -243,12 +221,10 @@ def populate_cost_variable_table(db_manager, gen_data, config):
                         cost_variable_unit,
                         cost_variable_notes
                     )
-                    data_list.append(data_tuple)
-    db_manager.populate_table_with_query_bulk(INSERT_COST_VARIABLE_QUERY, data_list)
+                    db_manager.execute_query(INSERT_COST_VARIABLE_QUERY, data_tuple)
 
 
 def populate_cost_fixed_table(db_manager, gen_data, config):
-    data_list = []
     defaults = gen_data.get('defaults', {})
     for region in config['Geography']['regions']:
         for generator_name in get_applicable_generators(config, region):
@@ -293,8 +269,7 @@ def populate_cost_fixed_table(db_manager, gen_data, config):
                         cost_fixed_unit,
                         cost_fixed_notes
                     )
-                    data_list.append(data_tuple)
-    db_manager.populate_table_with_query_bulk(INSERT_COST_FIXED_QUERY, data_list)
+                    db_manager.execute_query(INSERT_COST_FIXED_QUERY, data_tuple)
 
 
 def populate_capacity_credit_table(db_manager, gen_data, config):
@@ -354,7 +329,6 @@ def populate_discount_rate_table(db_manager, gen_data, config):
         region_specific_overrides = config['Generators']['New']['Overrides'].get(region, {})
         for generator_name in applicable_generators:
             generator = gen_data.get(generator_name, {})
-            tech = generator.get('name', defaults.get('name'))
             # Compute wacc (discount rate)
             wacc = get_discount_rate(generator, defaults, region_specific_overrides)
 
@@ -366,7 +340,7 @@ def populate_discount_rate_table(db_manager, gen_data, config):
 
             # Execute appropriate SQL query for each model year
             for year in config['Time']['model_years']:
-                data_tuple = (region, tech, year, wacc, notes)
+                data_tuple = (region, generator_name, year, wacc, notes)
                 db_manager.execute_query(INSERT_DISCOUNT_RATE_QUERY, data_tuple)
 
 
@@ -400,7 +374,7 @@ def populate_capacity_to_activity_table(db_manager, gen_data, config):
             db_manager.execute_query(INSERT_CAPACITY_TO_ACTIVITY_QUERY, data_tuple)
 
 
-def populate_lifetime_tech_table(db_manager, gen_data, config, type="tech"):
+def populate_lifetime_tech_table(db_manager, gen_data, config):
     """
     Populate the 'LifetimeTech' table in the database.
     Given a generator and a configuration, retrieve the technology life and its data source,
@@ -409,7 +383,6 @@ def populate_lifetime_tech_table(db_manager, gen_data, config, type="tech"):
     :param db_manager: an instance of the DatabaseManager class, providing DB functionality
     :param gen_data: dictionary containing generator data
     :param config: dictionary containing configuration data
-    :param type: string indicating the type of lifetime to populate (tech, loan, or both)
     """
     defaults = gen_data.get('defaults', {})
 
@@ -419,55 +392,15 @@ def populate_lifetime_tech_table(db_manager, gen_data, config, type="tech"):
             tech = generator.get('name', defaults.get('name'))
 
             # Retrieve lifespan and data source directly from generator data
-            if type == "tech" or type == "both":
-                life_t = generator.get('lifetime', defaults.get('lifetime'))
-            if type == "loan" or type == "both":
-                life_l = generator.get('capital_recovery_period', defaults.get('capital_recovery_period'))
+            life = generator.get('lifetime', defaults.get('lifetime'))
             data_source = generator.get('data_source', defaults.get('data_source'))
 
-            data_source = generator.get('data_source', defaults.get('data_source'))
+            # Prepare notes about the lifespan
+            life_notes = f"The technology {tech} has a lifespan of {life} years. Source: {data_source}"
 
-            if type == "tech" or type == "both":
-                data_tuple = (region, tech, life_t, data_source)
-                db_manager.execute_query(INSERT_LIFETIME_TECH_QUERY, data_tuple)
-            if type == "loan" or type == "both":
-                if life_l == None:
-                    continue
-                data_tuple = (region, tech, life_l, data_source)
-                db_manager.execute_query(INSERT_LIFETIME_LOAN_QUERY, data_tuple)
+            data_tuple = (region, tech, life, life_notes)
+            db_manager.execute_query(INSERT_LIFETIME_TECH_QUERY, data_tuple)
 
-def populate_capacity_factors_table(db_manager, gen_data, config):
-    hourly_map = create_hourly_to_season_day_map()
-
-    for file_name in os.listdir(constants.CAPACITY_FACTOR_PATH):
-        region, extension = os.path.splitext(file_name)
-        techs_to_include = get_applicable_generators(config, region)
-        if extension == ".csv":
-            file_path = os.path.join(constants.CAPACITY_FACTOR_PATH, file_name)
-            df = pd.read_csv(file_path, index_col=0)
-            techs_to_include = db_manager.execute_query("SELECT DISTINCT tech FROM Efficiency WHERE regions = ?",
-                                                        (region,),
-                                                        fetch=True)
-            techs_to_include = set([row[0] for row in techs_to_include])
-            print('-------')
-            print(techs_to_include)
-
-           # techs_to_include = set([row[0] for row in techs_to_include])
-           # print(techs_to_include)
-            for tech, series in df.items():
-                if tech not in techs_to_include:
-                    continue
-                print('---')
-                print(tech, series)
-                # Prepare the capacity factor data for DB insertion
-                data = []
-                for hour, value in series.items():
-                    season_name, time_of_day_name = hourly_map[hour]
-                    data.append((region, season_name, time_of_day_name, tech, value, ''))
-                query = '''INSERT INTO CapacityFactorTech 
-                        (regions, season_name, time_of_day_name, tech, cf_tech, cf_tech_notes) 
-                        VALUES (?, ?, ?, ?, ?, ?)'''
-                db_manager.populate_table_with_query_bulk(query, data)
 
 def populate_new_generators(db_manager, config, filename):
     gen_data = read_new_generator_data(filename)
@@ -479,6 +412,4 @@ def populate_new_generators(db_manager, config, filename):
     populate_capacity_credit_table(db_manager, gen_data, config)
     populate_discount_rate_table(db_manager, gen_data, config)
     populate_capacity_to_activity_table(db_manager, gen_data, config)
-    populate_lifetime_tech_table(db_manager, gen_data, config, type="both")
-
-    populate_capacity_factors_table(db_manager, gen_data, config)
+    populate_lifetime_tech_table(db_manager, gen_data, config)

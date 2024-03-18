@@ -17,7 +17,7 @@ inflation_rate = 0.025
 [Units]
 activity = "MWh" # kWh, MWh, GWh, TWh, GJ, TJ, PJ
 capacity = "MW" # kW, MW, GW, TW
-emissions = "kt" # g, kg, t, kt, Mt
+emissions = "t" # g, kg, t, kt, Mt
 currency = "none" # none, k, M, B
 
 [Generators]
@@ -31,7 +31,8 @@ currency = "none" # none, k, M, B
     NS = ["naturalgas-ct-fframe-moderate",
           "naturalgas-cc-hframe-moderate",
           "naturalgas-cc-ccs-95-hframe-moderate",
-          "nuclear-smr-moderate"]
+          "nuclear-smr-moderate",
+          "wind-onshore-advanced"]
     NB = []  # Fill this as needed
 
       [Generators.New.Overrides]
@@ -43,6 +44,25 @@ currency = "none" # none, k, M, B
     [Generators.Existing.Regional]
     NS = ["all"]
     NB = []  # Fill this as needed
+
+[Storage]
+
+  [Storage.New]
+  file_name = "./data_files/storage/new/atb-2023-storage.toml"
+
+     [Storage.New.Regional]
+     global = {}
+
+     NS = {"battery-lion-utility-moderate" = [2, 4], "battery-LDES-dummy" = [100, 1000]} # energy to power ratio.
+     NB = {} # Fill this as needed
+
+    [Storage.New.Overrides]
+
+  [Storage.Existing]
+
+     [Storage.Existing.Regional]
+     NS = {}
+     NB = {}  # Fill this as needed
 
 [Transmission]
 

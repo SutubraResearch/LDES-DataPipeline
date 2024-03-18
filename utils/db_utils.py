@@ -17,11 +17,12 @@ class SQLiteDBManager:
         except Error as e:
             print(e)
 
-    def execute_query(self, query, data=None, many=False):
+    def execute_query(self, query, data=None, many=False, fetch=False):
         """Execute a single or multiple queries using the database connection
         :param query: a SQL query
         :param data: data to pass into the query, if applicable
         :param many: if True, execute the query for each item in data
+        :param fetch: if True, return the results of the query
         """
         try:
             cur = self.conn.cursor()
@@ -32,6 +33,11 @@ class SQLiteDBManager:
                     cur.execute(query, data)
             else:
                 cur.execute(query)
+
+            # If fetch is true, return the fetched data
+            if fetch:
+                return cur.fetchall()
+
             self.conn.commit()
         except Error as e:
             print(e)
@@ -46,6 +52,18 @@ class SQLiteDBManager:
     def populate_table_with_query_bulk(self, query, data):
         with self.conn:
             self.conn.executemany(query, data)
+
+    def get_all_values_from_columns(self, table_name: str, column_names: list):
+        """Get all unique values from specified columns in a table
+        :param table_name: a string that specifies the table name
+        :param column_names: a list of column names
+        """
+        values = []
+        cur = self.conn.cursor()
+        for column in column_names:
+            cur.execute(f"SELECT DISTINCT {column} FROM {table_name}")
+            values.extend([row[0] for row in cur.fetchall()])  # append values from each row of results
+        return values
 
 def copy_and_rename_sqlite_template(template_path: str, dest_dir: str, file_name: str) -> str:
     """Copy the SQLite template file and rename it according to the configuration"""

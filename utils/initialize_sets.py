@@ -1,6 +1,12 @@
 from utils.time_utils import create_hourly_to_season_day_map
 import time
 
+def initialize_scenario_dependent_sets(db_manager, config):
+    populate_regions(db_manager, config)
+    populate_commodities(db_manager)
+    populate_GDR(db_manager, config)
+    populate_time_periods(db_manager, config)
+    populate_myopic_baseyear(db_manager, config)
 
 def initialize_scenario_independent_sets(db_manager):
     populate_commodity_labels(db_manager)
@@ -63,3 +69,57 @@ def populate_segfrac(conn):
     (season_name, time_of_day_name) in hourly_map.items()]
 
     conn.populate_table_with_query_bulk(query, segfrac_data)
+
+def populate_commodities(db_manager):
+    # retrieve all unique commodities in the 'in_comm', 'out_comm', and 'emis_comm'
+    commodities = set(db_manager.get_all_values_from_columns('Efficiency', ['input_comm', 'output_comm']))
+    emis_commodities = set(db_manager.get_all_values_from_columns('EmissionActivity', ['emis_comm']))
+
+    # Create demand_comms, ethos_comms, and emis_comms lists and update commodities set
+    demand_comms = [comm for comm in commodities if 'demand' in comm]
+    ethos_comms = [comm for comm in commodities if 'ethos' in comm]
+    commodities = [comm for comm in commodities if
+                   'demand' not in comm and 'ethos' not in comm and comm not in emis_commodities]
+
+    # Distinguish between different types of commodities and assign flags
+    emis_data = [(comm, 'e', '') for comm in emis_commodities]
+    ethos_data = [(comm, 's', '') for comm in ethos_comms]
+    demand_data = [(comm, 'd', '') for comm in demand_comms]
+    other_data = [(comm, 'p', '') for comm in commodities]
+
+    # Combine all data
+    data = emis_data + ethos_data + demand_data + other_data
+
+    # Now continue processing as before with the refined commodities set
+    query = 'INSERT INTO commodities (comm_name, flag, comm_desc) VALUES (?, ?, ?)'
+    populate_table_with_query(db_manager, query, data)
+
+def populate_regions(db_manager, config):
+    regions = config['Geography']['regions']
+    query = 'INSERT INTO regions (regions, region_note) VALUES (?, ?)'
+    populate_table_with_query(db_manager, query, [(region, '') for region in regions])
+
+def populate_GDR(db_manager, config):
+    gdr = config['Financials']['social_discount_rate']
+    query = 'INSERT INTO GlobalDiscountRate (rate) VALUES (?)'
+    populate_table_with_query(db_manager, query, [(float(gdr),)])
+
+
+def populate_time_periods(db_manager, config):
+    model_years = config['Time']['model_years']
+    model_years.append(
+        model_years[-1] + (model_years[-1] - model_years[-2]) if len(model_years) > 1 else model_years[0] + 1)
+    query = 'INSERT INTO time_periods (t_periods, flag) VALUES (?, ?)'
+    populate_table_with_query(db_manager, query, [(year, 'f') for year in model_years])
+
+    populate_table_with_query(db_manager, query, [(1900, 'e') for year in model_years])
+
+
+    query = 'INSERT INTO time_period_labels (t_period_labels, t_period_labels_desc) VALUES (?, ?)'
+    populate_table_with_query(db_manager, query, [('e', 'existing')])
+    populate_table_with_query(db_manager, query, [('f', 'future')])
+
+def populate_myopic_baseyear(db_manager, config):
+    base_year = config['Time']['model_years'][0]
+    query = 'INSERT INTO MyopicBaseyear (year) VALUES (?)'
+    populate_table_with_query(db_manager, query, [(base_year,)])

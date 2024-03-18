@@ -8,75 +8,79 @@ end_year = 2050
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: New England"
-emis_CO2 = 74.14 # kg/MMBtu
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+emis_co2 = 74.14 # kg/MMBtu
 
 [residual-fuel-oil]
 name = "heavy-fuel-oil"
 scenario = "mid"
 start_year = 2022
 end_year = 2050
-  [residual-fuel-oil.costs]
-  NS = [19.402708,16.243093,16.083735,14.673515,14.426414,14.192677,13.929043,14.02191,14.111901,14.226027,14.32989,14.424664,14.528852,14.643457,14.734312,14.834518,14.940911,15.006621,15.091688,15.218106,15.234455,15.304069,15.351792,15.410127,15.56899,15.569899,15.691525,15.782837,15.852317]
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: New England"
-emis_CO2 = 75.093 # kg/MMBtu
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+emis_co2 = 75.093 # kg/MMBtu
+  [residual-fuel-oil.costs]
+  NS = [19.402708,16.243093,16.083735,14.673515,14.426414,14.192677,13.929043,14.02191,14.111901,14.226027,14.32989,14.424664,14.528852,14.643457,14.734312,14.834518,14.940911,15.006621,15.091688,15.218106,15.234455,15.304069,15.351792,15.410127,15.56899,15.569899,15.691525,15.782837,15.852317]
+
 
 [natural-gas]
 name = "natural-gas"
 scenario = "mid"
 start_year = 2022
 end_year = 2050
-  [natural-gas.costs]
-  NS = [8.308649,6.684712,5.194127,4.213594,3.625669,3.13443,2.876058,3.03356,2.914836,2.828695,3.016352,2.997193,3.066314,3.159226,3.231528,3.293992,3.45593,3.515431,3.590063,3.765538,3.788926,3.73375,3.592151,3.651824,3.564594,3.515119,3.444422,3.45306,3.507589]
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: New England"
-emis_CO2 = 52.91 # kg/MMBtu
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+emis_co2 = 52.91 # kg/MMBtu
+  [natural-gas.costs]
+  NS = [8.308649,6.684712,5.194127,4.213594,3.625669,3.13443,2.876058,3.03356,2.914836,2.828695,3.016352,2.997193,3.066314,3.159226,3.231528,3.293992,3.45593,3.515431,3.590063,3.765538,3.788926,3.73375,3.592151,3.651824,3.564594,3.515119,3.444422,3.45306,3.507589]
+
+
 
 [natural-gas-ccs-95]
 name = "natural-gas-ccs"
 scenario = "mid"
 start_year = 2022
 end_year = 2050
-  [natural-gas-ccs-95.costs]
-  NS = [8.308649,6.684712,5.194127,4.213594,3.625669,3.13443,2.876058,3.03356,2.914836,2.828695,3.016352,2.997193,3.066314,3.159226,3.231528,3.293992,3.45593,3.515431,3.590063,3.765538,3.788926,3.73375,3.592151,3.651824,3.564594,3.515119,3.444422,3.45306,3.507589]
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: New England"
-emis_CO2 = 2.6455 # kg/MMBtu ; 5% of usual natural gas.
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+emis_co2 = 2.6455 # kg/MMBtu ; 5% of usual natural gas.
+  [natural-gas-ccs-95.costs]
+  NS = [8.308649,6.684712,5.194127,4.213594,3.625669,3.13443,2.876058,3.03356,2.914836,2.828695,3.016352,2.997193,3.066314,3.159226,3.231528,3.293992,3.45593,3.515431,3.590063,3.765538,3.788926,3.73375,3.592151,3.651824,3.564594,3.515119,3.444422,3.45306,3.507589]
+
+
 
 [coal]
 name = "coal"
 scenario = "mid"
 start_year = 2022
 end_year = 2050
-  [coal.costs]
-  NS = [2.08875,2.063801,2.055524,2.069094,2.081482,2.084447,2.096089,2.120943,2.118054,2.100696,2.088863,2.085079,2.077316,2.071161,2.062794,1.894991,1.895638,1.895452,1.897631,1.903817,1.911305,1.919849,1.927319,1.933412,1.941033,1.949271,1.954113,1.963171,1.962928]
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: Middle Atlantic"
-emis_SO2 = 0
-emis_NOx = 0
-emis_Hg = 0
-emis_CO2 = 0
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: Middle Atlantic"
+emis_co2 = 93.24
+  [coal.costs]
+  NS = [2.08875,2.063801,2.055524,2.069094,2.081482,2.084447,2.096089,2.120943,2.118054,2.100696,2.088863,2.085079,2.077316,2.071161,2.062794,1.894991,1.895638,1.895452,1.897631,1.903817,1.911305,1.919849,1.927319,1.933412,1.941033,1.949271,1.954113,1.963171,1.962928]
+
 
 [uranium]
 name = "uranium"
 scenario = "mid"
 start_year = 2022
 end_year = 2050
-  [uranium.costs]
-  NS = [0.710872,0.7108,0.710739,0.710677,0.710606,0.710544,0.710482,0.710411,0.710349,0.710277,0.710216,0.710154,0.710083,0.710021,0.709949,0.709888,0.709826,0.709755,0.709693,0.709631,0.70956,0.709498,0.709426,0.709365,0.709303,0.709232,0.70917,0.709108,0.709037]
 cost_unit = "USD"
 cost_year = 2022
 activity_unit = "MMBtu"
-data_source = "EIA AEO (2023) -- Table 3; Case: Referenec; Region: New England"
-emis_CO2 = 0
+data_source = "EIA AEO (2023) -- Table 3; Case: Reference; Region: New England"
+emis_co2 = 0
+  [uranium.costs]
+  NS = [0.710872,0.7108,0.710739,0.710677,0.710606,0.710544,0.710482,0.710411,0.710349,0.710277,0.710216,0.710154,0.710083,0.710021,0.709949,0.709888,0.709826,0.709755,0.709693,0.709631,0.70956,0.709498,0.709426,0.709365,0.709303,0.709232,0.70917,0.709108,0.709037]
+
 
 

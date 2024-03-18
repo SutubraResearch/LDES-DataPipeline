@@ -1,0 +1,17 @@
+
+[import-tech]
+name = "IMP_<FUEL>"
+region = " "
+input_comm = "ethos"
+output_comm = "<FUEL>"
+activity_unit = "MMBtu"
+sector="imports"
+lifetime = 100
+efficiency = 1.0
+variable_costs = [] # this will be replaced by the fuel-specific costs
+emissions = {} # these will be replaced by the fuel-specific emissions
+vintage = "" # this will be replaced by the first planning period
+
+# costs and emission facotrs are defined in the fuel-specific sections
+
+
